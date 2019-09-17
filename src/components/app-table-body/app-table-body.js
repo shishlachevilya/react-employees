@@ -4,9 +4,7 @@ import './app-table-body.css';
 
 class TableBody extends React.Component {
 
-  state = {
-
-  };
+  state = {};
 
   render() {
 
@@ -25,6 +23,7 @@ class TableBody extends React.Component {
               type="number"
               className="form-control"
               placeholder={ hours }
+              value={ hours }
               onChange={ ({ target }) => onChangeHours(id, target.value) }
             />
           </td>
@@ -32,6 +31,7 @@ class TableBody extends React.Component {
             <input
               type="number"
               className="form-control"
+              value={ rate }
               placeholder={ rate }
               onChange={ ({ target }) => onChangeRate(id, target.value) }
             />

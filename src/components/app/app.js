@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../app-header';
 import Table from '../app-table';
+import AppForm from '../app-form';
 
 import './app.css';
 
@@ -14,18 +15,21 @@ class App extends React.Component {
     ]
   };
 
-  change = (arr, id, num, propName1, propName2) => {
-    if(num.length === '') {
-      console.log('empty');
-    }
+  count = 100;
+
+  change = (arr, id, num, propName) => {
+    const parseNum = parseFloat(num) || 0;
+
+    if (parseNum < 0) return arr;
+
     const index = arr.findIndex((el) => el.id === id);
     const oldPerson = arr[index];
 
-    const parseNum = parseInt(num);
-
-    const newPerson = {
-      ...oldPerson, [propName1]: parseNum, total: oldPerson[propName2] * parseNum
+    let newPerson = {
+      ...oldPerson, [propName]: parseNum,
     };
+
+    newPerson.total = newPerson.rate * newPerson.hours;
 
     const newPeoples = [
       ...arr.slice(0, index),
@@ -39,7 +43,7 @@ class App extends React.Component {
   onChangeHours = (id, num) => {
     this.setState(({ peoples }) => {
       return {
-        peoples: this.change(peoples, id, num, 'hours', 'rate')
+        peoples: this.change(peoples, id, num, 'hours')
       }
     });
   };
@@ -47,7 +51,27 @@ class App extends React.Component {
   onChangeRate = (id, num) => {
     this.setState(({ peoples }) => {
       return {
-        peoples: this.change(peoples, id, num, 'rate', 'hours')
+        peoples: this.change(peoples, id, num, 'rate')
+      }
+    });
+  };
+
+  onAddNewPerson = (person) => {
+    this.setState(({ peoples }) => {
+      const newPerson = {
+        id: ++this.count,
+        ...person
+      };
+
+      newPerson.total = newPerson.rate * newPerson.hours;
+
+      const newPeoples = [
+        ...peoples,
+        newPerson
+      ];
+
+      return {
+        peoples: newPeoples
       }
     });
   };
@@ -65,6 +89,8 @@ class App extends React.Component {
           onChangeHours={ this.onChangeHours }
           onChangeRate={ this.onChangeRate }
         />
+
+        <AppForm onAddNewPerson={ this.onAddNewPerson }/>
       </div>
     )
   }
