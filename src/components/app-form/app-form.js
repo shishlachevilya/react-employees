@@ -85,7 +85,7 @@ class AppForm extends React.Component {
           <label htmlFor="rate">Rate</label>
           <input
             id="rate"
-            type="text"
+            type="number"
             value={ this.state.rate }
             className="form-control"
             placeholder="Enter rate"
