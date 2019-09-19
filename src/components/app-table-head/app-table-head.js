@@ -11,6 +11,7 @@ const TableHead = () => {
     { title: 'Hours' },
     { title: 'Rate' },
     { title: 'Total' },
+    { title: '' }
   ];
 
   const head = headers.map(({title}) => {

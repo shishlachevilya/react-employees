@@ -8,14 +8,14 @@ class TableBody extends React.Component {
 
   render() {
 
-    const { peoples, onChangeHours, onChangeRate } = this.props;
+    const { peoples, onChangeHours, onChangeRate, onDeletePerson } = this.props;
 
     const cells = peoples.map((el, index) => {
       const { id, firstName, lastName, hours, rate, total } = el;
 
       return (
         <tr key={ id }>
-          <th>{ ++index }</th>
+          <td>{ ++index }</td>
           <td>{ firstName }</td>
           <td>{ lastName }</td>
           <td>
@@ -37,6 +37,14 @@ class TableBody extends React.Component {
             />
           </td>
           <td>{ total }</td>
+          <td>
+            <button
+              className="btn btn-danger"
+              onClick={ () => onDeletePerson(id) }
+            >
+              delete
+            </button>
+          </td>
         </tr>
       )
     });

@@ -1,11 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './header.css';
 
-const Header = () => {
+const Header = ({ label, amount }) => {
   return (
-    <h3>Employees table</h3>
+    <div>
+      <h3>{ label }</h3>
+      <p>total employees - { amount }</p>
+    </div>
   )
+};
+
+Header.propTypes = {
+  label: PropTypes.string,
+  amount: PropTypes.number
 };
 
 export default Header;

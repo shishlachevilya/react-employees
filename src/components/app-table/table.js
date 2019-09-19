@@ -8,7 +8,7 @@ class Table extends React.Component {
 
   render() {
 
-    const { peoples, onChangeHours, onChangeRate } = this.props;
+    const { peoples, onChangeHours, onChangeRate, onDeletePerson } = this.props;
 
     return (
       <table className="table table-striped">
@@ -18,6 +18,7 @@ class Table extends React.Component {
           peoples={ peoples }
           onChangeHours={ onChangeHours }
           onChangeRate={ onChangeRate }
+          onDeletePerson={ onDeletePerson }
         />
       </table>
     )

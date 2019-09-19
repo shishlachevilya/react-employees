@@ -12,7 +12,7 @@ class App extends React.Component {
       { id: 1, firstName: 'Ivan', lastName: 'Ivanov', hours: 10, rate: 100, total: 1000 },
       { id: 2, firstName: 'Petya', lastName: 'Petrov', hours: 3, rate: 10, total: 30 },
       { id: 3, firstName: 'John', lastName: 'Week', hours: 100, rate: 100, total: 10000 }
-    ]
+    ],
   };
 
   count = 100;
@@ -76,21 +76,44 @@ class App extends React.Component {
     });
   };
 
+  onDeletePerson = (id) => {
+    this.setState(({ peoples }) => {
+      const index = peoples.findIndex((el) => el.id === id);
+
+      const newPeoples = [
+        ...peoples.slice(0, index),
+        ...peoples.slice(index + 1)
+      ];
+
+      return {
+        peoples: newPeoples
+      }
+    });
+  };
+
   render() {
 
     const { peoples } = this.state;
 
     return (
-      <div className="app-wrap">
-        <Header/>
+      <div>
+        <div className="app-wrap">
+          <Header
+            label="Employees table"
+            amount={ this.state.peoples.length }
+          />
 
-        <Table
-          peoples={ peoples }
-          onChangeHours={ this.onChangeHours }
-          onChangeRate={ this.onChangeRate }
-        />
+          <Table
+            peoples={ peoples }
+            onChangeHours={ this.onChangeHours }
+            onChangeRate={ this.onChangeRate }
+            onDeletePerson={ this.onDeletePerson }
+          />
 
-        <AppForm onAddNewPerson={ this.onAddNewPerson }/>
+          <AppForm
+            onAddNewPerson={ this.onAddNewPerson }
+          />
+        </div>
       </div>
     )
   }
